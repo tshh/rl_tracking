@@ -5,3 +5,5 @@ A camera serve as a tracking sensor.
 rl will try to control servos to tracking obj movement ,
 try its best to keep obj in the center of  camera's view.
 
+try to use i51080ti to edit readme
+
