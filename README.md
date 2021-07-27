@@ -13,3 +13,6 @@ here are things to do :
 2. drive robotis servo in speed mode, setting its bundary
 3. use projector to produce obj to be tracked
 4. train a agent 
+
+
+try to pull and edit in i9 
