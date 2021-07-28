@@ -5,6 +5,8 @@ import pybullet as p
 from rl_tracking.resources.car import Car
 from rl_tracking.resources.plane import Plane
 from rl_tracking.resources.goal import Goal
+from rl_tracking.resources.camgoalsua134gc import CamGoalSua134gc
+
 import matplotlib.pyplot as plt
 
 
@@ -33,6 +35,7 @@ class RlTracking(gym.Env):
         self.prev_dist_to_goal = None
         self.rendered_img = None
         self.render_rot_matrix = None
+        self.hcamera = 0
         self.reset()
 
     def step(self, action):

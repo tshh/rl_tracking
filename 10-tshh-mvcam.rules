@@ -1,0 +1,8 @@
+SYSFS{idVendor}=="f622", \
+
+SYSFS{idProduct}=="d13a", \
+
+SYMLINK+="mvusbcam", MODE="0666", \
+
+group="mvusbcam"
+
