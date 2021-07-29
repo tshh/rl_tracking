@@ -13,3 +13,5 @@ class test_camgoalsua134gc():
 if __name__ == "__main__":
     test = test_camgoalsua134gc()
     test.reset()
+    while 1:
+        test.camgoal.get_observation()
