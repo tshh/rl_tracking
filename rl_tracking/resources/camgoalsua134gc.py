@@ -112,5 +112,5 @@ class CamGoalSua134gc():
         cv2.waitKey(1)
 
 
-        observation = 1
+        observation = [image_highlight_bin_x , image_highlight_bin_x ]
         return observation
