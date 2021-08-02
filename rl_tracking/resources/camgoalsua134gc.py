@@ -76,6 +76,9 @@ class CamGoalSua134gc():
             mvsdk.CameraImageProcess(self.hCamera, pRawData, self.pFrameBuffer, FrameHead)
             mvsdk.CameraReleaseImageBuffer(self.hCamera, pRawData)
 
+            #上下颠倒图像，有可能需要旋转180度，摄像机倒装
+            #mvsdk.CameraFlipFrameBuffer(self.pFrameBuffer, FrameHead, 1)
+
             frame_data = (mvsdk.c_ubyte * FrameHead.uBytes).from_address(self.pFrameBuffer)
             frame = np.frombuffer(frame_data, dtype=np.uint8)
             frame = frame.reshape((FrameHead.iHeight, FrameHead.iWidth, 1 if FrameHead.uiMediaType == mvsdk.CAMERA_MEDIA_TYPE_MONO8 else 3) )
@@ -86,7 +89,10 @@ class CamGoalSua134gc():
         #calc obj from the image get the bonding box
         #retrun the bonding box
         
-        frame = cv2.resize(frame, (640,480), interpolation = cv2.INTER_LINEAR)
+        frame_rotate = cv2.rotate(frame,cv2.ROTATE_180)
+
+
+        frame = cv2.resize(frame_rotate, (640,480), interpolation = cv2.INTER_LINEAR)
         retval, image_highlight_bin = cv2.threshold(frame,100,255,cv2.THRESH_BINARY)
         image_highlight_bin_moment = cv2.moments(image_highlight_bin)
         m00 = image_highlight_bin_moment['m00']
@@ -95,10 +101,16 @@ class CamGoalSua134gc():
         image_highlight_bin_x = 320
         image_highlight_bin_y = 240
         if m00>0:
-            image_highlight_bin_x = int(m10/m00)
-            image_highlight_bin_y = int(m01/m00)
-        cv2.circle(frame,(image_highlight_bin_x,image_highlight_bin_y),50,(255,255,255),2,8)
+            image_highlight_bin_x = m10/m00
+            image_highlight_bin_y = m01/m00
+        image_highlight_bin_x_int = int(image_highlight_bin_x)
+        image_highlight_bin_y_int = int(image_highlight_bin_y)
+
+
+        cv2.circle(frame,(image_highlight_bin_x_int,image_highlight_bin_y_int),50,(255,255,255),2,8)
         cv2.imshow("Press q to end", frame)
         cv2.waitKey(1)
+
+
         observation = 1
         return observation

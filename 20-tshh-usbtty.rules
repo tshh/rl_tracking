@@ -1,0 +1,7 @@
+SYSFS{idVendor}=="0403", \
+
+SYSFS{idProduct}=="6001", \
+
+SYMLINK+="FT232usbserial", MODE="0666", \
+
+group="FT232usbserial"
