@@ -1,4 +1,5 @@
 from rl_tracking.resources.robotisAX12A import robotisAX12A
+import time
 
 class test_robotisAX12A():
     def __init__(self):
@@ -12,3 +13,5 @@ if __name__ == "__main__":
     test.reset()
     while 1:
         test.servo.get_observation()
+        test.servo.apply_action([512,512])
+        time.sleep(2)

@@ -88,3 +88,19 @@ class robotisAX12A():
 
     def apply_action(self, action):
         print('apply action to AX-12A')
+        # Write goal position
+        self.DXL_ID =1
+        gola_position= action[0]
+        dxl_comm_result, dxl_error = self.packetHandler.write2ByteTxRx(self.portHandler, self.DXL_ID, self.ADDR_AX_GOAL_POSITION, gola_position)   #dxl_goal_position[index]
+        if dxl_comm_result != COMM_SUCCESS:
+            print("%s" % self.packetHandler.getTxRxResult(dxl_comm_result))
+        elif dxl_error != 0:
+            print("%s" % self.packetHandler.getRxPacketError(dxl_error))
+        
+        self.DXL_ID =2
+        gola_position= action[1]
+        dxl_comm_result, dxl_error = self.packetHandler.write2ByteTxRx(self.portHandler, self.DXL_ID, self.ADDR_AX_GOAL_POSITION, gola_position)   #dxl_goal_position[index]
+        if dxl_comm_result != COMM_SUCCESS:
+            print("%s" % self.packetHandler.getTxRxResult(dxl_comm_result))
+        elif dxl_error != 0:
+            print("%s" % self.packetHandler.getRxPacketError(dxl_error))
